@@ -1,27 +1,27 @@
 #include <SDL.h>
 #include <iostream>
 
-void DrawHorizontalLine(SDL_Renderer* renderer, int x, int y, int length)
-{
-    for (int i = 0; i < length; i++)
-    {
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-        SDL_RenderDrawPoint(renderer, (x + i), y);
-        SDL_RenderPresent(renderer);
-    }
-
-}
-
-void DrawVerticalLine(SDL_Renderer* renderer, int x, int y, int length)
-{
-    for (int i = 0; i < length; i++)
-    {
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-        SDL_RenderDrawPoint(renderer, x, (y + i));
-        SDL_RenderPresent(renderer);
-    }
-
-}
+//void DrawHorizontalLine(SDL_Renderer* renderer, int x, int y, int length)
+//{
+//    for (int i = 0; i < length; i++)
+//    {
+//        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+//        SDL_RenderDrawPoint(renderer, (x + i), y);
+//        SDL_RenderPresent(renderer);
+//    }
+//
+//}
+//
+//void DrawVerticalLine(SDL_Renderer* renderer, int x, int y, int length)
+//{
+//    for (int i = 0; i < length; i++)
+//    {
+//        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+//        SDL_RenderDrawPoint(renderer, x, (y + i));
+//        SDL_RenderPresent(renderer);
+//    }
+//
+//}
 
 
 int main(int argc, char* argv[])
@@ -53,9 +53,12 @@ int main(int argc, char* argv[])
     SDL_RenderDrawPoint(renderer, 100, 100);
     SDL_RenderPresent(renderer);*/
 
-    DrawHorizontalLine(renderer, 10, 10, 100);
-    DrawVerticalLine(renderer, 10, 10, 100);
+    /*DrawHorizontalLine(renderer, 10, 10, 100);
+    DrawVerticalLine(renderer, 10, 10, 100);*/
 
+    /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_RenderDrawLine(renderer, 10, 10, 110, 110);
+    SDL_RenderPresent(renderer);*/
 
     SDL_Delay(4500);
     SDL_DestroyWindow(window);
