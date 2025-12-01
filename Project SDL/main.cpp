@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <iostream>
 
+float pi = 3.14159265358979f;
 //void DrawHorizontalLine(SDL_Renderer* renderer, int x, int y, int length)
 //{
 //    for (int i = 0; i < length; i++)
@@ -23,6 +24,33 @@
 //
 //}
 
+//void DrawRectangle(SDL_Renderer* renderer, int x, int y, int width, int height)
+//{
+//    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+//    SDL_RenderDrawLine(renderer, x, y, (x + width), y);
+//    SDL_RenderDrawLine(renderer, (x + width), y, (x + width), (y + height));
+//    SDL_RenderDrawLine(renderer, (x + width), (y + height), x, (y + height));
+//    SDL_RenderDrawLine(renderer, x, (y + height), x, y);
+//    SDL_RenderPresent(renderer);
+//    
+//
+//}
+
+void DrawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius, int precision)
+
+{
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    for (int i = 0; i < precision; i++)
+    {
+        SDL_RenderDrawPoint(renderer, ((centerX + radius) + i), (centerY + radius));
+    }
+    SDL_RenderPresent(renderer);
+}
+
+// etape 1 pi * precision 
+//etape 2 cos point etape 1 * i
+//etape pareil sin 
+// pareil cos sin i +1
 
 int main(int argc, char* argv[])
 {
@@ -59,6 +87,10 @@ int main(int argc, char* argv[])
     /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderDrawLine(renderer, 10, 10, 110, 110);
     SDL_RenderPresent(renderer);*/
+
+    /*DrawRectangle(renderer, 10, 10, 200, 100);*/
+
+    DrawCircle(renderer, 250, 250, 69, 666);
 
     SDL_Delay(4500);
     SDL_DestroyWindow(window);
