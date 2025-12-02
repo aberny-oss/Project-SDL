@@ -102,9 +102,10 @@ int main(int argc, char* argv[])
 
 
     Rectangle rectangle(100,50);
+    
+    rectangle.SetPosition(100, 100, 0.5f, 0.5f);
 
     rectangle.Draw(renderer);
-
 
 
     /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
