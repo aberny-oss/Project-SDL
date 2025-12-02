@@ -3,8 +3,8 @@
 class Circle : public Geometry
 {
 public:
-	Circle(int x, int y, int width, int height)
-		: Geometry(x, y, width, height)
+	Circle(int width, int height)
+		: Geometry(width, height)
 	{}
 
 };

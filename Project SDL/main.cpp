@@ -101,6 +101,9 @@ int main(int argc, char* argv[])
     }
 
 
+    Rectangle rectangle(100,50);
+
+    rectangle.Draw(renderer);
 
 
 
