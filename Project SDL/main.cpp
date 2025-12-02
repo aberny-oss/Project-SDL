@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <iostream>
+#include "Rectangle.h"
 
 //void DrawHorizontalLine(SDL_Renderer* renderer, int x, int y, int length)
 //{
@@ -35,39 +36,39 @@ void DrawRectangle(SDL_Renderer* renderer, int x, int y, int width, int height)
 
 }
 
-void DrawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius, int precision)
-
-{
-    /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    float perimeter = 2 * M_PI;
-    float step = perimeter / precision; 
-
-    for (int i = 0; i < precision; i++)
-    {
-        int x1 = radius * cos(step * i) + centerX;
-        int y1 = radius * sin(step * i) + centerY;
-        int x2 = radius * cos(step * (i + 1)) + centerX;
-        int y2 = radius * sin(step * (i + 1)) + centerY;
-
-        SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
-    }
-    SDL_RenderPresent(renderer);*/
-
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    float perimeter = 2 * M_PI;
-    float step = perimeter / precision;
-
-    for (int i = 0; i < precision; i++)
-    {
-        int x1 = radius * cos(step * i) + centerX;
-        int y1 = radius * sin(step * i) + centerY;
-        int x2 = radius * cos(step * (i + 1)) + centerX;
-        int y2 = radius * sin(step * (i + 1)) + centerY;
-
-        SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
-    }
-    SDL_RenderPresent(renderer);
-}
+//void DrawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius, int precision)
+//
+//{
+//    /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+//    float perimeter = 2 * M_PI;
+//    float step = perimeter / precision; 
+//
+//    for (int i = 0; i < precision; i++)
+//    {
+//        int x1 = radius * cos(step * i) + centerX;
+//        int y1 = radius * sin(step * i) + centerY;
+//        int x2 = radius * cos(step * (i + 1)) + centerX;
+//        int y2 = radius * sin(step * (i + 1)) + centerY;
+//
+//        SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+//    }
+//    SDL_RenderPresent(renderer);*/
+//
+//    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+//    float perimeter = 2 * M_PI;
+//    float step = perimeter / precision;
+//
+//    for (int i = 0; i < precision; i++)
+//    {
+//        int x1 = radius * cos(step * i) + centerX;
+//        int y1 = radius * sin(step * i) + centerY;
+//        int x2 = radius * cos(step * (i + 1)) + centerX;
+//        int y2 = radius * sin(step * (i + 1)) + centerY;
+//
+//        SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+//    }
+//    SDL_RenderPresent(renderer);
+//}
 
 // etape 1 pi / precision 
 //etape 2 cos point etape 1 * i
@@ -99,6 +100,10 @@ int main(int argc, char* argv[])
         return 1;
     }
 
+
+
+
+
     /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderDrawPoint(renderer, 100, 100);
     SDL_RenderPresent(renderer);*/
@@ -112,7 +117,10 @@ int main(int argc, char* argv[])
 
     /*DrawRectangle(renderer, 10, 10, 200, 100);*/
 
-    DrawCircle(renderer, 250, 250, 69, 666);
+    //tuto
+    /*Rectangle rect(0, 0, 50, 50);*/
+
+    /*DrawCircle(renderer, 250, 250, 69, 666);*/
 
     SDL_Delay(4500);
     SDL_DestroyWindow(window);
