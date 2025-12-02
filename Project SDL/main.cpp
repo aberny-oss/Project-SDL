@@ -101,11 +101,19 @@ int main(int argc, char* argv[])
     }
 
 
-    Rectangle rectangle(100,50);
+    Rectangle rectangle1(100,50);
+    Rectangle rectangle2(100, 50);
+    Rectangle rectangle3(100, 50);
+    Rectangle rectangle4(100, 50);
+    Rectangle rectangle5(100, 50);
     
-    rectangle.SetPosition(100, 100, 0.5f, 0.5f);
+    rectangle1.SetPosition(0, 0, 0.f, 0.f);
+    Vector2 pos = rectangle1.GetPosition(0.5f, 0.5f);
+    rectangle1.Draw(renderer);
 
-    rectangle.Draw(renderer);
+    rectangle2.SetPosition(640, 0, 1.f, 0.f);
+    pos = rectangle2.GetPosition(0.5f, 0.5f);
+    rectangle2.Draw(renderer);
 
 
     /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
