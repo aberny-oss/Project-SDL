@@ -2,10 +2,14 @@
 #include "Geometry.h"
 class Circle : public Geometry
 {
+private:
+	int m_precision;
+
 public:
-	Circle(int width, int height)
-		: Geometry(width, height)
-	{}
+	Circle(int radius, int precision) : Geometry(radius * 2, radius * 2)
+	{
+		m_precision = precision;
+	}
 
 };
 

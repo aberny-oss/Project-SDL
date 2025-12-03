@@ -70,6 +70,26 @@ void DrawRectangle(SDL_Renderer* renderer, int x, int y, int width, int height)
 //    SDL_RenderPresent(renderer);
 //}
 
+void DrawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius, int precision)
+{
+    float perimeter = 2 * M_PI;
+    float step = perimeter / precision;
+
+    int lastX = radius * cos(0) + centerX;
+    int lastY = radius * sin(0) + centerY;
+
+    for (int i = 1; i <= precision; i++)
+    {
+        int currentX = radius * cos(step * i) + centerX;
+        int currentY = radius * sin(step * i) + centerY;
+
+        SDL_RenderDrawLine(renderer, lastX, lastY, currentX, currentY);
+
+        lastX = currentX;
+        lastY = currentY;
+    }
+}
+
 // etape 1 pi / precision 
 //etape 2 cos point etape 1 * i
 //etape pareil sin 
