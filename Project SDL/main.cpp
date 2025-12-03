@@ -83,7 +83,10 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    SDL_Window* window = SDL_CreateWindow("SDL", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
+    int wWidth = 640;
+    int wHeight = 480;
+
+    SDL_Window* window = SDL_CreateWindow("SDL", 250, 250, wWidth, 480, SDL_WINDOW_SHOWN);
 
     if (!window)
     {
@@ -107,13 +110,25 @@ int main(int argc, char* argv[])
     Rectangle rectangle4(100, 50);
     Rectangle rectangle5(100, 50);
     
-    rectangle1.SetPosition(0, 0, 0.f, 0.f);
-    Vector2 pos = rectangle1.GetPosition(0.5f, 0.5f);
+    rectangle1.SetPosition((wWidth - wWidth), (wHeight - wHeight), 0.f, 0.f);
+    Vector2 pos1 = rectangle1.GetPosition(0.5f, 0.5f);
     rectangle1.Draw(renderer);
 
-    rectangle2.SetPosition(640, 0, 1.f, 0.f);
-    pos = rectangle2.GetPosition(0.5f, 0.5f);
+    rectangle2.SetPosition((wWidth - 1), (wHeight - wHeight), 1.f, 0.f);
+    Vector2 pos2 = rectangle2.GetPosition(0.5f, 0.5f);
     rectangle2.Draw(renderer);
+
+    rectangle3.SetPosition((wWidth - 1), (wHeight - 1), 1.f, 1.f);
+    Vector2 pos3 = rectangle3.GetPosition(0.5f, 0.5f);
+    rectangle3.Draw(renderer);
+
+    rectangle4.SetPosition((wWidth - wWidth), (wHeight - 1), 0.f, 1.f);
+    Vector2 pos4 = rectangle4.GetPosition(0.5f, 0.5f);
+    rectangle4.Draw(renderer);
+
+    rectangle5.SetPosition((wWidth / 2), (wHeight / 2), 0.5f, 0.5f);
+    Vector2 pos5 = rectangle5.GetPosition(0.5f, 0.5f);
+    rectangle5.Draw(renderer);
 
 
     /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);

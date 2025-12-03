@@ -3,7 +3,7 @@
 void Geometry::SetPosition(int x, int y, float anchorX, float anchorY)
 {
 	m_x = x - (m_width * anchorX);
-	m_y = y - (m_width * anchorY);
+	m_y = y - (m_height * anchorY);
 }
 
 Vector2 Geometry::GetPosition(float anchorX, float anchorY)
