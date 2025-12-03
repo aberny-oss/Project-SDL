@@ -24,17 +24,17 @@
 //
 //}
 
-void DrawRectangle(SDL_Renderer* renderer, int x, int y, int width, int height)
-{
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_RenderDrawLine(renderer, x, y, (x + width), y);
-    SDL_RenderDrawLine(renderer, (x + width), y, (x + width), (y + height));
-    SDL_RenderDrawLine(renderer, (x + width), (y + height), x, (y + height));
-    SDL_RenderDrawLine(renderer, x, (y + height), x, y);
-    SDL_RenderPresent(renderer);
-    
-
-}
+//void DrawRectangle(SDL_Renderer* renderer, int x, int y, int width, int height)
+//{
+//    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+//    SDL_RenderDrawLine(renderer, x, y, (x + width), y);
+//    SDL_RenderDrawLine(renderer, (x + width), y, (x + width), (y + height));
+//    SDL_RenderDrawLine(renderer, (x + width), (y + height), x, (y + height));
+//    SDL_RenderDrawLine(renderer, x, (y + height), x, y);
+//    SDL_RenderPresent(renderer);
+//    
+//
+//}
 
 //void DrawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius, int precision)
 //
