@@ -1,7 +1,10 @@
 #include <SDL.h>
 #include <iostream>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 #include "Rectangle.h"
 #include "Circle.h"
+
 
 //void DrawHorizontalLine(SDL_Renderer* renderer, int x, int y, int length)
 //{
@@ -98,6 +101,7 @@
 
 int main(int argc, char* argv[])
 {
+    srand(time(NULL));
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
         std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
@@ -131,33 +135,86 @@ int main(int argc, char* argv[])
     Rectangle rectangle4(100, 50);
     Rectangle rectangle5(100, 50);
 
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    int colorR = rand() % 256;
+    int colorG = rand() % 256;
+    int colorB = rand() % 256;
 
+    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle1.SetPosition((wWidth - wWidth), (wHeight - wHeight), 0.f, 0.f);
-    Vector2 posR1 = rectangle1.GetPosition(0.5f, 0.5f);
     rectangle1.Draw(renderer);
 
+    colorR = rand() % 256;
+    colorG = rand() % 256;
+    colorB = rand() % 256;
+
+    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle2.SetPosition((wWidth - 1), (wHeight - wHeight), 1.f, 0.f);
-    Vector2 posR2 = rectangle2.GetPosition(0.5f, 0.5f);
     rectangle2.Draw(renderer);
 
+    colorR = rand() % 256;
+    colorG = rand() % 256;
+    colorB = rand() % 256;
+
+    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle3.SetPosition((wWidth - 1), (wHeight - 1), 1.f, 1.f);
-    Vector2 posR3 = rectangle3.GetPosition(0.5f, 0.5f);
     rectangle3.Draw(renderer);
 
+    colorR = rand() % 256;
+    colorG = rand() % 256;
+    colorB = rand() % 256;
+
+    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle4.SetPosition((wWidth - wWidth), (wHeight - 1), 0.f, 1.f);
-    Vector2 posR4 = rectangle4.GetPosition(0.5f, 0.5f);
     rectangle4.Draw(renderer);
 
+    colorR = rand() % 256;
+    colorG = rand() % 256;
+    colorB = rand() % 256;
+
+    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle5.SetPosition((wWidth / 2), (wHeight / 2), 0.5f, 0.5f);
-    Vector2 posR5 = rectangle5.GetPosition(0.5f, 0.5f);
     rectangle5.Draw(renderer);
-
+    Vector2 posR5L = rectangle5.GetPosition(0.f, 0.f);
+    Vector2 posR5R = rectangle5.GetPosition(1.f, 0.f);
+    Vector2 posR5U = rectangle5.GetPosition(1.f, 1.f);
+    Vector2 posR5D = rectangle5.GetPosition(0.f, 1.f);
+    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    Circle circle1(69, 666);
+    Circle circle1(32, 666);
+    Circle circle2(32, 666);
+    Circle circle3(32, 666);
+    Circle circle4(32, 666);
 
-    circle1.SetPosition((wWidth / 2), (wHeight / 2), 0.5f, 0.5f);
-    Vector2 posC1 = circle1.GetPosition(0.5f, 0.5f);
+    colorR = rand() % 256;
+    colorG = rand() % 256;
+    colorB = rand() % 256;
+
+    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
+    circle1.SetPosition(posR5L.x, posR5L.y, 0.5f, 0.5f);
+    circle1.Draw(renderer);
+
+    colorR = rand() % 256;
+    colorG = rand() % 256;
+    colorB = rand() % 256;
+
+    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
+    circle1.SetPosition(posR5R.x, posR5R.y, 0.5f, 0.5f);
+    circle1.Draw(renderer);
+
+    colorR = rand() % 256;
+    colorG = rand() % 256;
+    colorB = rand() % 256;
+
+    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
+    circle1.SetPosition(posR5U.x, posR5U.y, 0.5f, 0.5f);
+    circle1.Draw(renderer);
+
+    colorR = rand() % 256;
+    colorG = rand() % 256;
+    colorB = rand() % 256;
+
+    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
+    circle1.SetPosition(posR5D.x, posR5D.y, 0.5f, 0.5f);
     circle1.Draw(renderer);
 
     SDL_RenderPresent(renderer);
