@@ -3,6 +3,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include <SDL_image.h>
+#include <SDL_events.h>
 #include "Rectangle.h"
 #include "Circle.h"
 #include "Image.h"
@@ -264,6 +265,28 @@ int main(int argc, char* argv[])
     /*DrawCircle(renderer, 250, 250, 69, 666);*/
 
     SDL_RenderPresent(renderer);
+
+    bool game_is_still_running = true;
+    while (game_is_still_running)
+    {
+        SDL_Event event;
+        while (SDL_PollEvent(&event))
+        {
+            switch (event.type)
+            {
+            case SDL_KEYDOWN:
+                std::cout << "key down" << std::endl;
+                break;
+            case SDL_KEYUP:
+                std::cout << "key up" << std::endl;
+                break;
+            case SDL_QUIT:
+                std::cout << "key up" << std::endl;
+                break;
+            }
+        }
+    }
+
 
     SDL_Delay(4500);
     SDL_DestroyWindow(window);
