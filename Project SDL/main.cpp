@@ -2,8 +2,10 @@
 #include <iostream>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+#include <SDL_image.h>
 #include "Rectangle.h"
 #include "Circle.h"
+#include "Image.h"
 
 
 //void DrawHorizontalLine(SDL_Renderer* renderer, int x, int y, int length)
@@ -111,7 +113,7 @@ int main(int argc, char* argv[])
     int wWidth = 640;
     int wHeight = 480;
 
-    SDL_Window* window = SDL_CreateWindow("SDL", 250, 250, wWidth, 480, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("SDL", 250, 250, wWidth, wHeight, SDL_WINDOW_SHOWN);
 
     if (!window)
     {
@@ -142,6 +144,7 @@ int main(int argc, char* argv[])
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle1.SetPosition((wWidth - wWidth), (wHeight - wHeight), 0.f, 0.f);
     rectangle1.Draw(renderer);
+    Vector2 posR1RD = rectangle1.GetPosition(1.f, 1.f);
 
     colorR = rand() % 256;
     colorG = rand() % 256;
@@ -150,6 +153,7 @@ int main(int argc, char* argv[])
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle2.SetPosition((wWidth - 1), (wHeight - wHeight), 1.f, 0.f);
     rectangle2.Draw(renderer);
+    Vector2 posR2LD = rectangle2.GetPosition(0.f, 1.f);
 
     colorR = rand() % 256;
     colorG = rand() % 256;
@@ -158,6 +162,7 @@ int main(int argc, char* argv[])
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle3.SetPosition((wWidth - 1), (wHeight - 1), 1.f, 1.f);
     rectangle3.Draw(renderer);
+    Vector2 posR3LU = rectangle3.GetPosition(0.f, 0.f);
 
     colorR = rand() % 256;
     colorG = rand() % 256;
@@ -166,6 +171,7 @@ int main(int argc, char* argv[])
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle4.SetPosition((wWidth - wWidth), (wHeight - 1), 0.f, 1.f);
     rectangle4.Draw(renderer);
+    Vector2 posR4RU = rectangle4.GetPosition(1.f, 0.f);
 
     colorR = rand() % 256;
     colorG = rand() % 256;
@@ -174,10 +180,10 @@ int main(int argc, char* argv[])
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle5.SetPosition((wWidth / 2), (wHeight / 2), 0.5f, 0.5f);
     rectangle5.Draw(renderer);
-    Vector2 posR5L = rectangle5.GetPosition(0.f, 0.f);
-    Vector2 posR5R = rectangle5.GetPosition(1.f, 0.f);
-    Vector2 posR5U = rectangle5.GetPosition(1.f, 1.f);
-    Vector2 posR5D = rectangle5.GetPosition(0.f, 1.f);
+    Vector2 posR5LU = rectangle5.GetPosition(0.f, 0.f);
+    Vector2 posR5RU = rectangle5.GetPosition(1.f, 0.f);
+    Vector2 posR5RD = rectangle5.GetPosition(1.f, 1.f);
+    Vector2 posR5LD = rectangle5.GetPosition(0.f, 1.f);
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     Circle circle1(32, 666);
@@ -190,7 +196,7 @@ int main(int argc, char* argv[])
     colorB = rand() % 256;
 
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
-    circle1.SetPosition(posR5L.x, posR5L.y, 0.5f, 0.5f);
+    circle1.SetPosition(posR5LU.x, posR5LU.y, 0.5f, 0.5f);
     circle1.Draw(renderer);
 
     colorR = rand() % 256;
@@ -198,7 +204,7 @@ int main(int argc, char* argv[])
     colorB = rand() % 256;
 
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
-    circle1.SetPosition(posR5R.x, posR5R.y, 0.5f, 0.5f);
+    circle1.SetPosition(posR5RU.x, posR5RU.y, 0.5f, 0.5f);
     circle1.Draw(renderer);
 
     colorR = rand() % 256;
@@ -206,7 +212,7 @@ int main(int argc, char* argv[])
     colorB = rand() % 256;
 
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
-    circle1.SetPosition(posR5U.x, posR5U.y, 0.5f, 0.5f);
+    circle1.SetPosition(posR5RD.x, posR5RD.y, 0.5f, 0.5f);
     circle1.Draw(renderer);
 
     colorR = rand() % 256;
@@ -214,10 +220,29 @@ int main(int argc, char* argv[])
     colorB = rand() % 256;
 
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
-    circle1.SetPosition(posR5D.x, posR5D.y, 0.5f, 0.5f);
+    circle1.SetPosition(posR5LD.x, posR5LD.y, 0.5f, 0.5f);
     circle1.Draw(renderer);
 
-    SDL_RenderPresent(renderer);
+    
+    Image image1(renderer, "imageSDL.bmp",(wWidth / 4), (wHeight / 4));
+    image1.SetPosition(posR1RD.x, posR1RD.y, 0.f, 0.f);
+    image1.Draw(renderer);
+
+    Image image2(renderer, "imageSDL.bmp", (wWidth / 4), (wHeight / 4));
+    image2.SetPosition(posR2LD.x, posR2LD.y, 1.f, 0.f);
+    image2.Draw(renderer);
+
+    Image image3(renderer, "imageSDL.bmp", (wWidth / 4), (wHeight / 4));
+    image3.SetPosition(posR3LU.x, posR3LU.y, 1.f, 1.f);
+    image3.Draw(renderer);
+
+    Image image4(renderer, "imageSDL.bmp", (wWidth / 4), (wHeight / 4));
+    image4.SetPosition(posR4RU.x, posR4RU.y, 0.f, 1.f);
+    image4.Draw(renderer);
+
+    /*SDL_RenderCopy(renderer, texture, NULL, NULL);
+
+    SDL_RenderPresent(renderer);*/
 
 
     /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
@@ -237,6 +262,8 @@ int main(int argc, char* argv[])
     /*Rectangle rect(0, 0, 50, 50);*/
 
     /*DrawCircle(renderer, 250, 250, 69, 666);*/
+
+    SDL_RenderPresent(renderer);
 
     SDL_Delay(4500);
     SDL_DestroyWindow(window);
