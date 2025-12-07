@@ -281,14 +281,15 @@ int main(int argc, char* argv[])
                 std::cout << "key up" << std::endl;
                 break;
             case SDL_QUIT:
-                std::cout << "key up" << std::endl;
+                std::cout << "key quit" << std::endl;
+                game_is_still_running = false;
                 break;
             }
         }
     }
 
 
-    SDL_Delay(4500);
+    SDL_Delay(1000);
     SDL_DestroyWindow(window);
     SDL_Quit();
 
