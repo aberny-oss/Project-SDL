@@ -268,6 +268,15 @@ int main(int argc, char* argv[])
 
     SDL_RenderPresent(renderer);
 
+    struct State
+    {
+        bool isDown;
+        bool isHeld;
+        bool isUp;
+    };
+
+    State m_states[SDL_NUM_SCANCODES];
+
     bool game_is_still_running = true;
     while (game_is_still_running)
     {
@@ -277,22 +286,93 @@ int main(int argc, char* argv[])
             switch (event.type)
             {
             case SDL_KEYDOWN:
+            {
+                switch (event.key.keysym.sym)
+                {
+                case SDLK_a:
+                    if (event.key.repeat)
+                        break;
+
+                    m_states[event.key.keysym.scancode].isDown = true;
+                    break;
+                }
+				break;
+            }
+            case SDL_KEYUP:
+            {
+                switch (event.key.keysym.sym)
+                {
+                case SDLK_a:
+                    m_states[event.key.keysym.scancode].isUp = true;
+                    break;
+                }
+                break;
+            }
+            }
+            /*switch (event.key.type)
+            {
+            case SDL_KEYDOWN:
                 std::cout << "key down" << std::endl;
+                switch (event.key.keysym.sym)
+                {
+                case SDLK_a:
+                    std::cout << "key a down" << std::endl;
+                    break;
+                case SDLK_ESCAPE:
+                    std::cout << "key escape" << std::endl;
+                    game_is_still_running = false;
+                    break;
+                }
                 break;
             case SDL_KEYUP:
                 std::cout << "key up" << std::endl;
+                switch (event.key.keysym.sym)
+                {
+                case SDLK_a:
+                    std::cout << "key a up" << std::endl;
+                    break;
+                }
                 break;
             case SDL_QUIT:
                 std::cout << "key quit" << std::endl;
                 game_is_still_running = false;
                 break;
-            }
-            switch (event.key.keysym.scancode)
+            }*/
+            int x, y;
+            SDL_GetMouseState(&x, &y);
+            switch (event.button.type)
             {
-            case SDL_SCANCODE_A:
-                std::cout << "key a" << std::endl;
+            case SDL_MOUSEBUTTONDOWN:
+                /*std::cout << "mouse button down" << std::endl;*/
+                std::cout << "Clic a la positions " << x << " - " << y << std::endl;
+                break;
+            case SDL_MOUSEBUTTONUP:
+                /*std::cout << "mouse button up" << std::endl;*/
                 break;
             }
+        }
+        for (int i = 0; i < SDL_NUM_SCANCODES; ++i)
+        {
+            State& state = m_states[i];
+
+            if (state.isDown)
+            {
+                state.isHeld = true;
+                std::cout << "key a down" << std::endl;
+            }
+
+            if (state.isHeld)
+            {
+				std::cout << "key a held" << std::endl;
+			}
+
+            if (state.isUp)
+            {
+                state.isHeld = false;
+                std::cout << "key a up" << std::endl;
+            }
+            state.isDown = false;
+            state.isUp = false;
         }
     }
 
