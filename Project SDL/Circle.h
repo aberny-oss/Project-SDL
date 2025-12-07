@@ -1,19 +1,19 @@
 #pragma once
+
 #include "Geometry.h"
+
+#define DEFAULT_PRECISION 666
+
 class Circle : public Geometry
 {
-private:
-	int m_radius;
 	int m_precision;
 
 public:
-	Circle(int radius, int precision) : Geometry(radius * 2, radius * 2)
-	{
-		m_radius = radius;
-		m_precision = precision;
-	}
+	Circle(int radius, int precision = DEFAULT_PRECISION);
 
 	void Draw(SDL_Renderer* renderer) override;
+
+	int GetRadius() const { return m_width / 2; }
 
 };
 

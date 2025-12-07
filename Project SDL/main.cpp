@@ -4,6 +4,7 @@
 #include <time.h>       /* time */
 #include <SDL_image.h>
 #include <SDL_events.h>
+#include <vector>
 #include "Rectangle.h"
 #include "Circle.h"
 #include "Image.h"
@@ -102,33 +103,34 @@
 //etape pareil sin 
 // pareil cos sin i +1
 
+#define WIDTH 640
+#define HEIGHT 480
+
+#define CENTER_X (WIDTH - 1) / 2
+#define CENTER_Y (HEIGHT - 1) / 2
+
 int main(int argc, char* argv[])
 {
-    srand(time(NULL));
-    if (SDL_Init(SDL_INIT_VIDEO) != 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
     {
-        std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
+        std::cout << "Error SDL2 Initialization : " << SDL_GetError();
         return 1;
     }
 
-    int wWidth = 640;
-    int wHeight = 480;
-
-    SDL_Window* window = SDL_CreateWindow("SDL", 250, 250, wWidth, wHeight, SDL_WINDOW_SHOWN);
-
-    if (!window)
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+    window = SDL_CreateWindow("SDL", 250, 250, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
+    if (window == NULL)
     {
-        std::cout << "SDL_CreateWindow Error : " << SDL_GetError() << std::endl;
-        SDL_Quit();
-        return 1;
+        std::cout << "Error window creation";
+        return false;
     }
 
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL, 0);
-    if (!renderer)
+    renderer = SDL_CreateRenderer(window, NULL, 0);
+    if (renderer == NULL)
     {
-        std::cout << "SDL_CreateRenderer Error : " << SDL_GetError() << std::endl;
-        SDL_Quit();
-        return 1;
+        std::cout << "Error renderer creation";
+        return false;
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -143,7 +145,7 @@ int main(int argc, char* argv[])
     int colorB = rand() % 256;
 
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
-    rectangle1.SetPosition((wWidth - wWidth), (wHeight - wHeight), 0.f, 0.f);
+    rectangle1.SetPosition((WIDTH - WIDTH), (HEIGHT - HEIGHT), 0.f, 0.f);
     rectangle1.Draw(renderer);
     Vector2 posR1RD = rectangle1.GetPosition(1.f, 1.f);
 
@@ -152,7 +154,7 @@ int main(int argc, char* argv[])
     colorB = rand() % 256;
 
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
-    rectangle2.SetPosition((wWidth - 1), (wHeight - wHeight), 1.f, 0.f);
+    rectangle2.SetPosition((WIDTH - 1), (HEIGHT - HEIGHT), 1.f, 0.f);
     rectangle2.Draw(renderer);
     Vector2 posR2LD = rectangle2.GetPosition(0.f, 1.f);
 
@@ -161,7 +163,7 @@ int main(int argc, char* argv[])
     colorB = rand() % 256;
 
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
-    rectangle3.SetPosition((wWidth - 1), (wHeight - 1), 1.f, 1.f);
+    rectangle3.SetPosition((WIDTH - 1), (HEIGHT - 1), 1.f, 1.f);
     rectangle3.Draw(renderer);
     Vector2 posR3LU = rectangle3.GetPosition(0.f, 0.f);
 
@@ -170,7 +172,7 @@ int main(int argc, char* argv[])
     colorB = rand() % 256;
 
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
-    rectangle4.SetPosition((wWidth - wWidth), (wHeight - 1), 0.f, 1.f);
+    rectangle4.SetPosition((WIDTH - WIDTH), (HEIGHT - 1), 0.f, 1.f);
     rectangle4.Draw(renderer);
     Vector2 posR4RU = rectangle4.GetPosition(1.f, 0.f);
 
@@ -179,7 +181,7 @@ int main(int argc, char* argv[])
     colorB = rand() % 256;
 
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
-    rectangle5.SetPosition((wWidth / 2), (wHeight / 2), 0.5f, 0.5f);
+    rectangle5.SetPosition(CENTER_X, CENTER_Y, 0.5f, 0.5f);
     rectangle5.Draw(renderer);
     Vector2 posR5LU = rectangle5.GetPosition(0.f, 0.f);
     Vector2 posR5RU = rectangle5.GetPosition(1.f, 0.f);
@@ -224,20 +226,20 @@ int main(int argc, char* argv[])
     circle1.SetPosition(posR5LD.x, posR5LD.y, 0.5f, 0.5f);
     circle1.Draw(renderer);
 
-    
-    Image image1(renderer, "imageSDL.bmp",(wWidth / 4), (wHeight / 4));
+
+    Image image1(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
     image1.SetPosition(posR1RD.x, posR1RD.y, 0.f, 0.f);
     image1.Draw(renderer);
 
-    Image image2(renderer, "imageSDL.bmp", (wWidth / 4), (wHeight / 4));
+    Image image2(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
     image2.SetPosition(posR2LD.x, posR2LD.y, 1.f, 0.f);
     image2.Draw(renderer);
 
-    Image image3(renderer, "imageSDL.bmp", (wWidth / 4), (wHeight / 4));
+    Image image3(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
     image3.SetPosition(posR3LU.x, posR3LU.y, 1.f, 1.f);
     image3.Draw(renderer);
 
-    Image image4(renderer, "imageSDL.bmp", (wWidth / 4), (wHeight / 4));
+    Image image4(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
     image4.SetPosition(posR4RU.x, posR4RU.y, 0.f, 1.f);
     image4.Draw(renderer);
 

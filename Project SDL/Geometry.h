@@ -10,13 +10,16 @@ protected:
 	int m_height;
 
 public:
-	Geometry(int width, int height)
-		: m_x(0), m_y(0), m_width(width), m_height(height)
-	{}
+	Geometry(int width, int height);
+
 	virtual void Draw(SDL_Renderer* renderer) = 0;
 
+	void SetPosition(const Vector2& position, float anchorX = 0.5f, float anchorY = 0.5f);
 	void SetPosition(int x, int y, float anchorX, float anchorY);
+
 	Vector2 GetPosition(float anchorX, float anchorY);
+
+	virtual void Resize(int width, int height);
 
 
 };
