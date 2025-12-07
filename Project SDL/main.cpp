@@ -285,6 +285,12 @@ int main(int argc, char* argv[])
                 game_is_still_running = false;
                 break;
             }
+            switch (event.key.keysym.scancode)
+            {
+            case SDL_SCANCODE_A:
+                std::cout << "key a" << std::endl;
+                break;
+            }
         }
     }
 
