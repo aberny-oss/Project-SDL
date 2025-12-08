@@ -1,10 +1,10 @@
 #include "InputManager.h"
 
 // Méthode statique qui renvoie l'instance unique de InputManager (pattern Singleton)
-static InputManager* Get()
+InputManager* InputManager::Get()
 {
 	static InputManager instance; // Objet statique : créé une seule fois, réutilisé à chaque appel
-	return &instance;       // On renvoie l'adresse de cette unique instance
+	return &instance;             // On renvoie l'adresse de cette unique instance
 }
 
 // Fonction appelée à CHAQUE frame pour mettre à jour les états des touches
