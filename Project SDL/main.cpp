@@ -16,7 +16,6 @@
 //    {
 //        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 //        SDL_RenderDrawPoint(renderer, (x + i), y);
-//        SDL_RenderPresent(renderer);
 //    }
 //
 //}
@@ -27,7 +26,6 @@
 //    {
 //        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 //        SDL_RenderDrawPoint(renderer, x, (y + i));
-//        SDL_RenderPresent(renderer);
 //    }
 //
 //}
@@ -39,7 +37,6 @@
 //    SDL_RenderDrawLine(renderer, (x + width), y, (x + width), (y + height));
 //    SDL_RenderDrawLine(renderer, (x + width), (y + height), x, (y + height));
 //    SDL_RenderDrawLine(renderer, x, (y + height), x, y);
-//    SDL_RenderPresent(renderer);
 //    
 //
 //}
@@ -59,8 +56,7 @@
 //        int y2 = radius * sin(step * (i + 1)) + centerY;
 //
 //        SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
-//    }
-//    SDL_RenderPresent(renderer);*/
+//    }*/
 //
 //    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 //    float perimeter = 2 * M_PI;
@@ -75,7 +71,6 @@
 //
 //        SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
 //    }
-//    SDL_RenderPresent(renderer);
 //}
 
 //void DrawCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius, int precision)
@@ -227,7 +222,7 @@ int main(int argc, char* argv[])
     circle1.Draw(renderer);
 
 
-    Image image1(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
+    /*Image image1(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
     image1.SetPosition(posR1RD.x, posR1RD.y, 0.f, 0.f);
     image1.Draw(renderer);
 
@@ -241,23 +236,40 @@ int main(int argc, char* argv[])
 
     Image image4(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
     image4.SetPosition(posR4RU.x, posR4RU.y, 0.f, 1.f);
+    image4.Draw(renderer);*/
+
+	Image image1(renderer, "imageSDL.bmp");
+    Image image2(renderer, "imageSDL.bmp");
+    Image image3(renderer, "imageSDL.bmp");
+    Image image4(renderer, "imageSDL.bmp");
+
+	image1.Resize(CENTER_X / 2, CENTER_Y / 2);
+    image2.Resize(CENTER_X / 2, CENTER_Y / 2);
+    image3.Resize(CENTER_X / 2, CENTER_Y / 2);
+    image4.Resize(CENTER_X / 2, CENTER_Y / 2);
+
+    image1.SetPosition(posR1RD, 0.f, 0.f);
+    image2.SetPosition(posR2LD, 1.f, 0.f);
+    image3.SetPosition(posR3LU, 1.f, 1.f);
+    image4.SetPosition(posR4RU, 0.f, 1.f);
+
+	image1.Draw(renderer);
+    image2.Draw(renderer);
+    image3.Draw(renderer);
     image4.Draw(renderer);
 
-    /*SDL_RenderCopy(renderer, texture, NULL, NULL);
 
-    SDL_RenderPresent(renderer);*/
+    /*SDL_RenderCopy(renderer, texture, NULL, NULL);*/
 
 
     /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_RenderDrawPoint(renderer, 100, 100);
-    SDL_RenderPresent(renderer);*/
+    SDL_RenderDrawPoint(renderer, 100, 100);*/
 
     /*DrawHorizontalLine(renderer, 10, 10, 100);
     DrawVerticalLine(renderer, 10, 10, 100);*/
 
     /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_RenderDrawLine(renderer, 10, 10, 110, 110);
-    SDL_RenderPresent(renderer);*/
+    SDL_RenderDrawLine(renderer, 10, 10, 110, 110);*/
 
     /*DrawRectangle(renderer, 10, 10, 200, 100);*/
 
