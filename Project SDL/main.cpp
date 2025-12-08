@@ -8,6 +8,7 @@
 #include "Rectangle.h"
 #include "Circle.h"
 #include "Image.h"
+#include "InputManager.h"
 
 
 //void DrawHorizontalLine(SDL_Renderer* renderer, int x, int y, int length)
@@ -280,115 +281,283 @@ int main(int argc, char* argv[])
 
     SDL_RenderPresent(renderer);
 
-    struct State
+    /*struct State
     {
         bool isDown;
         bool isHeld;
         bool isUp;
     };
 
-    State m_states[SDL_NUM_SCANCODES];
+    State m_states[SDL_NUM_SCANCODES];*/
 
-    bool game_is_still_running = true;
-    while (game_is_still_running)
+   // bool game_is_still_running = true;
+   // while (game_is_still_running)
+   // {
+   //     SDL_Event event;
+   //     while (SDL_PollEvent(&event))
+   //     {
+   //         /*switch (event.type)
+   //         {
+   //         case SDL_KEYDOWN:
+   //         {
+   //             switch (event.key.keysym.sym)
+   //             {
+   //             case SDLK_a:
+   //                 if (event.key.repeat)
+   //                     break;
+
+   //                 m_states[event.key.keysym.scancode].isDown = true;
+   //                 break;
+   //             }
+			//	break;
+   //         }
+   //         case SDL_KEYUP:
+   //         {
+   //             switch (event.key.keysym.sym)
+   //             {
+   //             case SDLK_a:
+   //                 m_states[event.key.keysym.scancode].isUp = true;
+   //                 break;
+   //             }
+   //             break;
+   //         }
+   //         }*/
+   //         /*switch (event.key.type)
+   //         {
+   //         case SDL_KEYDOWN:
+   //             std::cout << "key down" << std::endl;
+   //             switch (event.key.keysym.sym)
+   //             {
+   //             case SDLK_a:
+   //                 std::cout << "key a down" << std::endl;
+   //                 break;
+   //             case SDLK_ESCAPE:
+   //                 std::cout << "key escape" << std::endl;
+   //                 game_is_still_running = false;
+   //                 break;
+   //             }
+   //             break;
+   //         case SDL_KEYUP:
+   //             std::cout << "key up" << std::endl;
+   //             switch (event.key.keysym.sym)
+   //             {
+   //             case SDLK_a:
+   //                 std::cout << "key a up" << std::endl;
+   //                 break;
+   //             }
+   //             break;
+   //         case SDL_QUIT:
+   //             std::cout << "key quit" << std::endl;
+   //             game_is_still_running = false;
+   //             break;
+   //         }*/
+   //         int x, y;
+   //         SDL_GetMouseState(&x, &y);
+   //         switch (event.button.type)
+   //         {
+   //         case SDL_MOUSEBUTTONDOWN:
+   //             /*std::cout << "mouse button down" << std::endl;*/
+   //             std::cout << "Clic a la positions " << x << " - " << y << std::endl;
+   //             break;
+   //         case SDL_MOUSEBUTTONUP:
+   //             /*std::cout << "mouse button up" << std::endl;*/
+   //             break;
+   //         }
+   //     }
+   //     /*for (int i = 0; i < SDL_NUM_SCANCODES; ++i)
+   //     {
+   //         State& state = m_states[i];
+
+   //         if (state.isDown)
+   //         {
+   //             state.isHeld = true;
+   //             std::cout << "key a down" << std::endl;
+   //         }
+
+   //         if (state.isHeld)
+   //         {
+			//	std::cout << "key a held" << std::endl;
+			//}
+
+   //         if (state.isUp)
+   //         {
+   //             state.isHeld = false;
+   //             std::cout << "key a up" << std::endl;
+   //         }
+   //         state.isDown = false;
+   //         state.isUp = false;
+   //     }*/
+   // }
+
+bool game_is_still_running = true;
+
+while (game_is_still_running)
+{
+    //  // 1) Met à jour les entrées (clavier)
+    //  InputManager::Get()->Update();
+    //  // 2) Lis les touches
+    //  if (InputManager::Get()->IsDown(SDLK_a))
+    //  {
+          //std::cout << "Touche A appuyée !" << std::endl; // Détecte le moment où on appuie sur la touche A
+    //  }
+    //  if (InputManager::Get()->IsHeld(SDLK_a))
+    //  {
+          //std::cout << "Touche A maintenue !" << std::endl; // Détecte tant que la touche A est maintenue enfoncée
+    //  }
+    //  if (InputManager::Get()->IsUp(SDLK_a))
+    //  {
+          //std::cout << "Touche A relâchée !" << std::endl; // Détecte le moment où on relâche la touche A
+    //  }
+    //  // 3) Update du jeu (physique, logique, etc.)
+    //  // 4) Render (affichage)
+
+      // Dans ta boucle de jeu
+    InputManager* input = InputManager::Get();
+    input->Update();
+
+
+    // On parcourt une petite liste de touches à tester
+    SDL_KeyCode keysToCheck[] = { SDLK_ESCAPE, SDLK_a, SDLK_z, SDLK_e, SDLK_r, SDLK_t, SDLK_y, SDLK_SPACE };
+
+    for (SDL_KeyCode key : keysToCheck)
     {
-        SDL_Event event;
-        while (SDL_PollEvent(&event))
+        if (!input->IsDown(key))
         {
-            switch (event.type)
-            {
-            case SDL_KEYDOWN:
-            {
-                switch (event.key.keysym.sym)
-                {
-                case SDLK_a:
-                    if (event.key.repeat)
-                        break;
-
-                    m_states[event.key.keysym.scancode].isDown = true;
-                    break;
-                }
-				break;
-            }
-            case SDL_KEYUP:
-            {
-                switch (event.key.keysym.sym)
-                {
-                case SDLK_a:
-                    m_states[event.key.keysym.scancode].isUp = true;
-                    break;
-                }
-                break;
-            }
-            }
-            /*switch (event.key.type)
-            {
-            case SDL_KEYDOWN:
-                std::cout << "key down" << std::endl;
-                switch (event.key.keysym.sym)
-                {
-                case SDLK_a:
-                    std::cout << "key a down" << std::endl;
-                    break;
-                case SDLK_ESCAPE:
-                    std::cout << "key escape" << std::endl;
-                    game_is_still_running = false;
-                    break;
-                }
-                break;
-            case SDL_KEYUP:
-                std::cout << "key up" << std::endl;
-                switch (event.key.keysym.sym)
-                {
-                case SDLK_a:
-                    std::cout << "key a up" << std::endl;
-                    break;
-                }
-                break;
-            case SDL_QUIT:
-                std::cout << "key quit" << std::endl;
-                game_is_still_running = false;
-                break;
-            }*/
-            int x, y;
-            SDL_GetMouseState(&x, &y);
-            switch (event.button.type)
-            {
-            case SDL_MOUSEBUTTONDOWN:
-                /*std::cout << "mouse button down" << std::endl;*/
-                std::cout << "Clic a la positions " << x << " - " << y << std::endl;
-                break;
-            case SDL_MOUSEBUTTONUP:
-                /*std::cout << "mouse button up" << std::endl;*/
-                break;
-            }
+            continue; // si cette touche n'a pas été pressée cette frame, on saute
         }
-        for (int i = 0; i < SDL_NUM_SCANCODES; ++i)
+        switch (key)
         {
-            State& state = m_states[i];
+        case SDLK_ESCAPE:
+            // quitter le jeu
+            game_is_still_running = false;
+            break;
 
-            if (state.isDown)
-            {
-                state.isHeld = true;
-                std::cout << "key a down" << std::endl;
-            }
+        case SDLK_a:
+            // Touche A pressée
+            std::cout << "Touche A appuyee !" << std::endl;
+            break;
 
-            if (state.isHeld)
-            {
-				std::cout << "key a held" << std::endl;
-			}
+        case SDLK_z:
+            // Touche Z pressée
+            std::cout << "Touche Z appuyee !" << std::endl;
+            break;
 
-            if (state.isUp)
-            {
-                state.isHeld = false;
-                std::cout << "key a up" << std::endl;
-            }
-            state.isDown = false;
-            state.isUp = false;
+        case SDLK_e:
+            // Touche E pressée
+            std::cout << "Touche E appuyee !" << std::endl;
+            break;
+
+        case SDLK_r:
+            // Touche R pressée
+            std::cout << "Touche R appuyee !" << std::endl;
+            break;
+
+        case SDLK_t:
+            // Touche T pressée
+            std::cout << "Touche T appuyee !" << std::endl;
+            break;
+
+        case SDLK_y:
+            // Touche Y pressée
+            std::cout << "Touche Y appuyee !" << std::endl;
+            break;
+
+        case SDLK_SPACE:
+            // Touche ESPACE pressée
+            std::cout << "Touche ESPACE appuyee !" << std::endl;
+            break;
+
+        default:
+            break;
         }
     }
 
+    for (SDL_KeyCode key : keysToCheck)
+    {
+        if (!input->IsHeld(key))
+        {
+            continue;
+        }
 
+        switch (key)
+        {
+        case SDLK_a:
+            // Touche A maintenue
+            std::cout << "Touche A maintenue !" << std::endl;
+            break;
+        case SDLK_z:
+            // Touche Z maintenue
+            std::cout << "Touche Z maintenue !" << std::endl;
+            break;
+        case SDLK_e:
+            // Touche E maintenue
+            std::cout << "Touche E maintenue !" << std::endl;
+            break;
+        case SDLK_r:
+            // Touche R maintenue
+            std::cout << "Touche R maintenue !" << std::endl;
+            break;
+        case SDLK_t:
+            // Touche T maintenue
+            std::cout << "Touche T maintenue !" << std::endl;
+            break;
+        case SDLK_y:
+            // Touche Y maintenue
+            std::cout << "Touche Y maintenue !" << std::endl;
+            break;
+        case SDLK_SPACE:
+            // Touche ESPACE maintenue
+            std::cout << "Touche ESPACE maintenue !" << std::endl;
+            break;
+        default:
+            break;
+        }
+    }
+
+    for (SDL_KeyCode key : keysToCheck)
+    {
+        if (!input->IsUp(key))
+        {
+            continue;
+        }
+
+        switch (key)
+        {
+        case SDLK_a:
+			// Touche A relâchée
+            std::cout << "Touche A relachee !" << std::endl;
+            break;
+        case SDLK_z:
+            // Touche Z relâchée
+            std::cout << "Touche Z relachee !" << std::endl;
+            break;
+        case SDLK_e:
+            // Touche E relâchée
+            std::cout << "Touche E relachee !" << std::endl;
+            break;
+        case SDLK_r:
+            // Touche R relâchée
+            std::cout << "Touche R relachee !" << std::endl;
+            break;
+        case SDLK_t:
+            // Touche T relâchée
+            std::cout << "Touche T relachee !" << std::endl;
+            break;
+        case SDLK_y:
+            // Touche Y relâchée
+            std::cout << "Touche Y relachee !" << std::endl;
+            break;
+        case SDLK_SPACE:
+            // Touche ESPACE relâchée
+            std::cout << "Touche ESPACE relachee !" << std::endl;
+            break;
+        default:
+            break;
+        }
+    }
+
+}
+    
     SDL_Delay(1000);
     SDL_DestroyWindow(window);
     SDL_Quit();
