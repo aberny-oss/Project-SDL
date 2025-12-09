@@ -105,6 +105,9 @@
 #define CENTER_X (WIDTH - 1) / 2
 #define CENTER_Y (HEIGHT - 1) / 2
 
+#define TARGET_FPS 60
+#define TARGET_DELTA_TIME 1.f / TARGET_FPS
+
 int main(int argc, char* argv[])
 {
     std::srand(static_cast<unsigned>(std::time(nullptr)));
@@ -132,7 +135,7 @@ int main(int argc, char* argv[])
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    Rectangle rectangle1(100,50);
+    /*Rectangle rectangle1(100,50);
     Rectangle rectangle2(100, 50);
     Rectangle rectangle3(100, 50);
     Rectangle rectangle4(100, 50);
@@ -184,48 +187,56 @@ int main(int argc, char* argv[])
     Vector2f posR5LU = rectangle5.GetPosition(0.f, 0.f);
     Vector2f posR5RU = rectangle5.GetPosition(1.f, 0.f);
     Vector2f posR5RD = rectangle5.GetPosition(1.f, 1.f);
-    Vector2f posR5LD = rectangle5.GetPosition(0.f, 1.f);
+    Vector2f posR5LD = rectangle5.GetPosition(0.f, 1.f);*/
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     Circle circle1(32);
     Circle circle2(32);
-    Circle circle3(32);
-    Circle circle4(32);
+    /*Circle circle3(32);
+    Circle circle4(32);*/
+
+	circle1.SetPosition(CENTER_X / 2, CENTER_Y / 2);
+	circle2.SetPosition(CENTER_X / 2 + CENTER_X, CENTER_Y / 2 + CENTER_Y);
+
+    int speedC1 = 400;
+	int speedC2 = 300;
+
+    float deltaTime = 0;
 
     /*colorR = rand() % 256;
     colorG = rand() % 256;
-    colorB = rand() % 256;*/
+    colorB = rand() % 256;
 
-    /*SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);*/
+    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     circle1.SetPosition(posR5LU.x, posR5LU.y);
     circle1.Draw(renderer);
 
-    /*colorR = rand() % 256;
+    colorR = rand() % 256;
     colorG = rand() % 256;
-    colorB = rand() % 256;*/
+    colorB = rand() % 256;
 
-    /*SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);*/
+    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     circle2.SetPosition(posR5RU.x, posR5RU.y);
     circle2.Draw(renderer);
 
-    /*colorR = rand() % 256;
+    colorR = rand() % 256;
     colorG = rand() % 256;
-    colorB = rand() % 256;*/
+    colorB = rand() % 256;
 
-    /*SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);*/
+    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     circle3.SetPosition(posR5RD.x, posR5RD.y);
     circle3.Draw(renderer);
 
-    /*colorR = rand() % 256;
+    colorR = rand() % 256;
     colorG = rand() % 256;
-    colorB = rand() % 256;*/
+    colorB = rand() % 256;
 
-    /*SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);*/
+    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     circle4.SetPosition(posR5LD.x, posR5LD.y);
     circle4.Draw(renderer);
 
 
-    /*Image image1(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
+    Image image1(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
     image1.SetPosition(posR1RD.x, posR1RD.y, 0.f, 0.f);
     image1.Draw(renderer);
 
@@ -261,10 +272,6 @@ int main(int argc, char* argv[])
     image3.Draw(renderer);
     image4.Draw(renderer);*/
 
-
-    /*SDL_RenderCopy(renderer, texture, NULL, NULL);*/
-
-
     /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderDrawPoint(renderer, 100, 100);*/
 
@@ -273,13 +280,6 @@ int main(int argc, char* argv[])
 
     /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderDrawLine(renderer, 10, 10, 110, 110);*/
-
-    /*DrawRectangle(renderer, 10, 10, 200, 100);*/
-
-    //tuto
-    /*Rectangle rect(0, 0, 50, 50);*/
-
-    /*DrawCircle(renderer, 250, 250, 69, 666);*/
 
     SDL_RenderPresent(renderer);
 
@@ -395,36 +395,40 @@ bool game_is_still_running = true;
 
 while (game_is_still_running)
 {
+	Uint64 start = SDL_GetTicks64(); // Temps au début de la frame
+
+	// LEARN INPUTS
     InputManager::Get()->Update();   // 1) lire les événements SDL
 
     //UPDATE
     if (InputManager::Get()->IsHeld(SDLK_o))
     {
         //move up
-        circle1.Move(0.f, -5.f);
+        circle1.Move(0.f, -speedC1 * deltaTime);
 
     }
     if (InputManager::Get()->IsHeld(SDLK_k))
     {
         //move left
-        circle1.Move(-5.f, 0.f);
+        circle1.Move(-speedC1 * deltaTime, 0.f);
 
     }
     if (InputManager::Get()->IsHeld(SDLK_l))
     {
         //move down
-        circle1.Move(0.f, 5.f);
+        circle1.Move(0.f, speedC1 * deltaTime);
     }
     if (InputManager::Get()->IsHeld(SDLK_m))
     {
         //move right
-        circle1.Move(5.f, 0.f);
+        circle1.Move(speedC1 * deltaTime, 0.f);
     }
 
-    circle2.Move(0.f, -0.05f);
+    circle2.Move(0.f, -speedC2 * deltaTime);
+
 
     if (circle2.GetPosition(0.f, 1.f).y < 0)
-        circle2.SetPosition(200, HEIGHT + circle2.GetRadius());
+        circle2.SetPosition(CENTER_X / 2 + CENTER_X, HEIGHT + circle2.GetRadius());
 
     if (circle1.IsColliding(&circle2))
         std::cout << "Les cercles ce touchent." << std::endl;
@@ -435,11 +439,22 @@ while (game_is_still_running)
     circle1.Draw(renderer);
     circle2.Draw(renderer);
 
-
     SDL_RenderPresent(renderer);
+    Uint64 end = SDL_GetTicks64();
+
+    deltaTime = (end - start) / 1000.f;
+    float diff = TARGET_DELTA_TIME - deltaTime;
+
+    //Cap FPS
+    if (diff > 0)
+    {
+        SDL_Delay(diff * 1000);
+        deltaTime = TARGET_DELTA_TIME;
+    }
+
+    //Display FPS
+    std::cout << 1.f / deltaTime << std::endl;
 }
-
-
 
 //while (game_is_still_running)
 //{
@@ -608,7 +623,7 @@ while (game_is_still_running)
 //
 //}
     
-    SDL_Delay(1000);
+    SDL_Delay(500);
     SDL_DestroyWindow(window);
     SDL_Quit();
 
