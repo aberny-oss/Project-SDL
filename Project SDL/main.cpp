@@ -188,6 +188,9 @@ int main(int argc, char* argv[])
     Vector2f posR5RU = rectangle5.GetPosition(1.f, 0.f);
     Vector2f posR5RD = rectangle5.GetPosition(1.f, 1.f);
     Vector2f posR5LD = rectangle5.GetPosition(0.f, 1.f);*/
+
+    Rectangle rectangle1(100, 50);
+    rectangle1.SetPosition(CENTER_X / 3, CENTER_Y / 3);
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     Circle circle1(32);
@@ -438,6 +441,8 @@ while (game_is_still_running)
     SDL_RenderClear(renderer);
     circle1.Draw(renderer);
     circle2.Draw(renderer);
+
+    rectangle1.Draw(renderer);
 
     SDL_RenderPresent(renderer);
     Uint64 end = SDL_GetTicks64();

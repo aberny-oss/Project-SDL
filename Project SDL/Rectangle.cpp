@@ -12,3 +12,9 @@ void Rectangle::Draw(SDL_Renderer* renderer)
 
 	SDL_RenderDrawRect(renderer, &rect);
 }
+
+Vector2f Rectangle::GetRadius() const
+{
+	Vector2f center = GetPosition(0.5f, 0.5f);
+	return center;
+}

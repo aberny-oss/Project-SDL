@@ -35,7 +35,7 @@ void Circle::Draw(SDL_Renderer* renderer)
 	}
 }
 
-bool Circle::IsColliding(const Circle* target)
+bool Circle::IsColliding(const Geometry* target)
 {
 	Vector2f center1 = GetPosition(0.5f, 0.5f);
 	Vector2f center2 = target->GetPosition(0.5f, 0.5f);
@@ -44,4 +44,9 @@ bool Circle::IsColliding(const Circle* target)
 	float radiusDist = GetRadius() + target->GetRadius();
 
 	return distance <= radiusDist;
+}
+
+int GetRadius() const
+{
+	return m_width / 2;
 }
