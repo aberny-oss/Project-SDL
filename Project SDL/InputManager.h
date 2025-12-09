@@ -24,16 +24,17 @@ private:
 	//const Uint8* m_keyboardState;    // Pointeur vers l'état du clavier fourni par SDL (approche alternative)
 	//Uint8 m_previousKeyboardState[SDL_NUM_SCANCODES] = { 0 }; // Copie de l'état du clavier à la frame précédente
 
-public:
-	// Méthode statique qui renvoie l'instance unique de InputManager (pattern Singleton)
-	static InputManager* Get();
-
 	// Constructeur de InputManager
 	InputManager()
 	{
 		//BONUS
 		//m_keyboardState = SDL_GetKeyboardState(NULL); // Récupère l'état clavier version SDL (si on utilise l'approche BONUS)
+		std::memset(m_states, 0, sizeof(State) * SDL_NUM_SCANCODES);
 	}
+
+public:
+	// Méthode statique qui renvoie l'instance unique de InputManager (pattern Singleton)
+	static InputManager* Get();
 
 	// Fonction appelée à CHAQUE frame pour mettre à jour les états des touches
 	void Update();

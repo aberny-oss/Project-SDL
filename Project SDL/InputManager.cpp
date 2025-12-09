@@ -10,23 +10,35 @@ InputManager* InputManager::Get()
 // Fonction appelée à CHAQUE frame pour mettre à jour les états des touches
 void InputManager::Update()
 {
-	// 1) Met à jour les états "transitoires" (isDown / isUp) et gère isHeld
+	//// 1) Met à jour les états "transitoires" (isDown / isUp) et gère isHeld
+	//for (int i = 0; i < SDL_NUM_SCANCODES; ++i)
+	//{
+	//	State& state = m_states[i]; // Raccourci vers l'état de la touche i
+
+	//	if (state.isDown)          // Si la touche venait d'être pressée à la frame précédente
+	//	{
+	//		state.isHeld = true;   // On considère maintenant qu'elle est maintenue (held)
+	//	}
+
+	//	if (state.isUp)            // Si la touche venait d'être relâchée à la frame précédente
+	//	{
+	//		state.isHeld = false;  // Elle n'est plus maintenue
+	//	}
+
+	//	state.isDown = false;      // On réinitialise isDown pour cette nouvelle frame
+	//	state.isUp = false;        // On réinitialise isUp pour cette nouvelle frame
+	//}
+
 	for (int i = 0; i < SDL_NUM_SCANCODES; ++i)
 	{
-		State& state = m_states[i]; // Raccourci vers l'état de la touche i
+		if (m_states[i].isDown)
+			m_states[i].isHeld = true;
 
-		if (state.isDown)          // Si la touche venait d'être pressée à la frame précédente
-		{
-			state.isHeld = true;   // On considère maintenant qu'elle est maintenue (held)
-		}
+		if (m_states[i].isUp)
+			m_states[i].isHeld = false;
 
-		if (state.isUp)            // Si la touche venait d'être relâchée à la frame précédente
-		{
-			state.isHeld = false;  // Elle n'est plus maintenue
-		}
-
-		state.isDown = false;      // On réinitialise isDown pour cette nouvelle frame
-		state.isUp = false;        // On réinitialise isUp pour cette nouvelle frame
+		m_states[i].isDown = false;
+		m_states[i].isUp = false;
 	}
 
 	// 2) Récupère tous les événements en attente (clavier, souris, etc.)
@@ -53,18 +65,18 @@ void InputManager::Update()
 			break;
 		}
 		}
-		int x, y;
-		SDL_GetMouseState(&x, &y);
-		switch (event.button.type)
-		{
-		case SDL_MOUSEBUTTONDOWN:
-		    /*std::cout << "mouse button down" << std::endl;*/
-		    std::cout << "Clic a la positions " << x << " - " << y << std::endl;
-		    break;
-		case SDL_MOUSEBUTTONUP:
-		    /*std::cout << "mouse button up" << std::endl;*/
-		    break;
-		}
+		//int x, y;
+		//SDL_GetMouseState(&x, &y);
+		//switch (event.button.type)
+		//{
+		//case SDL_MOUSEBUTTONDOWN:
+		//    /*std::cout << "mouse button down" << std::endl;*/
+		//    std::cout << "Clic a la positions " << x << " - " << y << std::endl;
+		//    break;
+		//case SDL_MOUSEBUTTONUP:
+		//    /*std::cout << "mouse button up" << std::endl;*/
+		//    break;
+		//}
 	}
 
 	// Approche alternative (BONUS) avec les tableaux d'état clavier de SDL :

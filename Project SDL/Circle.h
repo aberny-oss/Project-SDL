@@ -15,5 +15,7 @@ public:
 
 	int GetRadius() const { return m_width / 2; }
 
+	bool IsColliding(const Circle* target);
+
 };
 

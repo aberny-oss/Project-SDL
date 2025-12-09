@@ -1,10 +1,10 @@
 #include <SDL.h>
+
 #include <iostream>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
-#include <SDL_image.h>
-#include <SDL_events.h>
 #include <vector>
+
 #include "Rectangle.h"
 #include "Circle.h"
 #include "Image.h"
@@ -107,6 +107,7 @@
 
 int main(int argc, char* argv[])
 {
+    std::srand(static_cast<unsigned>(std::time(nullptr)));
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
     {
         std::cout << "Error SDL2 Initialization : " << SDL_GetError();
@@ -115,6 +116,7 @@ int main(int argc, char* argv[])
 
     SDL_Window* window;
     SDL_Renderer* renderer;
+
     window = SDL_CreateWindow("SDL", 250, 250, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
     if (window == NULL)
     {
@@ -143,7 +145,7 @@ int main(int argc, char* argv[])
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle1.SetPosition((WIDTH - WIDTH), (HEIGHT - HEIGHT), 0.f, 0.f);
     rectangle1.Draw(renderer);
-    Vector2 posR1RD = rectangle1.GetPosition(1.f, 1.f);
+    Vector2f posR1RD = rectangle1.GetPosition(1.f, 1.f);
 
     colorR = rand() % 256;
     colorG = rand() % 256;
@@ -152,7 +154,7 @@ int main(int argc, char* argv[])
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle2.SetPosition((WIDTH - 1), (HEIGHT - HEIGHT), 1.f, 0.f);
     rectangle2.Draw(renderer);
-    Vector2 posR2LD = rectangle2.GetPosition(0.f, 1.f);
+    Vector2f posR2LD = rectangle2.GetPosition(0.f, 1.f);
 
     colorR = rand() % 256;
     colorG = rand() % 256;
@@ -161,7 +163,7 @@ int main(int argc, char* argv[])
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle3.SetPosition((WIDTH - 1), (HEIGHT - 1), 1.f, 1.f);
     rectangle3.Draw(renderer);
-    Vector2 posR3LU = rectangle3.GetPosition(0.f, 0.f);
+    Vector2f posR3LU = rectangle3.GetPosition(0.f, 0.f);
 
     colorR = rand() % 256;
     colorG = rand() % 256;
@@ -170,7 +172,7 @@ int main(int argc, char* argv[])
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle4.SetPosition((WIDTH - WIDTH), (HEIGHT - 1), 0.f, 1.f);
     rectangle4.Draw(renderer);
-    Vector2 posR4RU = rectangle4.GetPosition(1.f, 0.f);
+    Vector2f posR4RU = rectangle4.GetPosition(1.f, 0.f);
 
     colorR = rand() % 256;
     colorG = rand() % 256;
@@ -179,48 +181,48 @@ int main(int argc, char* argv[])
     SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
     rectangle5.SetPosition(CENTER_X, CENTER_Y, 0.5f, 0.5f);
     rectangle5.Draw(renderer);
-    Vector2 posR5LU = rectangle5.GetPosition(0.f, 0.f);
-    Vector2 posR5RU = rectangle5.GetPosition(1.f, 0.f);
-    Vector2 posR5RD = rectangle5.GetPosition(1.f, 1.f);
-    Vector2 posR5LD = rectangle5.GetPosition(0.f, 1.f);
+    Vector2f posR5LU = rectangle5.GetPosition(0.f, 0.f);
+    Vector2f posR5RU = rectangle5.GetPosition(1.f, 0.f);
+    Vector2f posR5RD = rectangle5.GetPosition(1.f, 1.f);
+    Vector2f posR5LD = rectangle5.GetPosition(0.f, 1.f);
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    Circle circle1(32, 666);
-    Circle circle2(32, 666);
-    Circle circle3(32, 666);
-    Circle circle4(32, 666);
+    Circle circle1(32);
+    Circle circle2(32);
+    Circle circle3(32);
+    Circle circle4(32);
 
-    colorR = rand() % 256;
+    /*colorR = rand() % 256;
     colorG = rand() % 256;
-    colorB = rand() % 256;
+    colorB = rand() % 256;*/
 
-    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
-    circle1.SetPosition(posR5LU.x, posR5LU.y, 0.5f, 0.5f);
+    /*SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);*/
+    circle1.SetPosition(posR5LU.x, posR5LU.y);
     circle1.Draw(renderer);
 
-    colorR = rand() % 256;
+    /*colorR = rand() % 256;
     colorG = rand() % 256;
-    colorB = rand() % 256;
+    colorB = rand() % 256;*/
 
-    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
-    circle1.SetPosition(posR5RU.x, posR5RU.y, 0.5f, 0.5f);
-    circle1.Draw(renderer);
+    /*SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);*/
+    circle2.SetPosition(posR5RU.x, posR5RU.y);
+    circle2.Draw(renderer);
 
-    colorR = rand() % 256;
+    /*colorR = rand() % 256;
     colorG = rand() % 256;
-    colorB = rand() % 256;
+    colorB = rand() % 256;*/
 
-    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
-    circle1.SetPosition(posR5RD.x, posR5RD.y, 0.5f, 0.5f);
-    circle1.Draw(renderer);
+    /*SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);*/
+    circle3.SetPosition(posR5RD.x, posR5RD.y);
+    circle3.Draw(renderer);
 
-    colorR = rand() % 256;
+    /*colorR = rand() % 256;
     colorG = rand() % 256;
-    colorB = rand() % 256;
+    colorB = rand() % 256;*/
 
-    SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);
-    circle1.SetPosition(posR5LD.x, posR5LD.y, 0.5f, 0.5f);
-    circle1.Draw(renderer);
+    /*SDL_SetRenderDrawColor(renderer, colorR, colorG, colorB, 255);*/
+    circle4.SetPosition(posR5LD.x, posR5LD.y);
+    circle4.Draw(renderer);
 
 
     /*Image image1(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
@@ -239,7 +241,7 @@ int main(int argc, char* argv[])
     image4.SetPosition(posR4RU.x, posR4RU.y, 0.f, 1.f);
     image4.Draw(renderer);*/
 
-	Image image1(renderer, "imageSDL.bmp");
+	/*Image image1(renderer, "imageSDL.bmp");
     Image image2(renderer, "imageSDL.bmp");
     Image image3(renderer, "imageSDL.bmp");
     Image image4(renderer, "imageSDL.bmp");
@@ -257,7 +259,7 @@ int main(int argc, char* argv[])
 	image1.Draw(renderer);
     image2.Draw(renderer);
     image3.Draw(renderer);
-    image4.Draw(renderer);
+    image4.Draw(renderer);*/
 
 
     /*SDL_RenderCopy(renderer, texture, NULL, NULL);*/
@@ -393,170 +395,218 @@ bool game_is_still_running = true;
 
 while (game_is_still_running)
 {
-    //  // 1) Met à jour les entrées (clavier)
-    //  InputManager::Get()->Update();
-    //  // 2) Lis les touches
-    //  if (InputManager::Get()->IsDown(SDLK_a))
-    //  {
-          //std::cout << "Touche A appuyée !" << std::endl; // Détecte le moment où on appuie sur la touche A
-    //  }
-    //  if (InputManager::Get()->IsHeld(SDLK_a))
-    //  {
-          //std::cout << "Touche A maintenue !" << std::endl; // Détecte tant que la touche A est maintenue enfoncée
-    //  }
-    //  if (InputManager::Get()->IsUp(SDLK_a))
-    //  {
-          //std::cout << "Touche A relâchée !" << std::endl; // Détecte le moment où on relâche la touche A
-    //  }
-    //  // 3) Update du jeu (physique, logique, etc.)
-    //  // 4) Render (affichage)
+    InputManager::Get()->Update();   // 1) lire les événements SDL
 
-      // Dans ta boucle de jeu
-    InputManager* input = InputManager::Get();
-    input->Update();
-
-
-    // On parcourt une petite liste de touches à tester
-    SDL_KeyCode keysToCheck[] = { SDLK_ESCAPE, SDLK_a, SDLK_z, SDLK_e, SDLK_r, SDLK_t, SDLK_y, SDLK_SPACE };
-
-    for (SDL_KeyCode key : keysToCheck)
+    //UPDATE
+    if (InputManager::Get()->IsHeld(SDLK_o))
     {
-        if (!input->IsDown(key))
-        {
-            continue; // si cette touche n'a pas été pressée cette frame, on saute
-        }
-        switch (key)
-        {
-        case SDLK_ESCAPE:
-            // quitter le jeu
-            game_is_still_running = false;
-            break;
+        //move up
+        circle1.Move(0.f, -5.f);
 
-        case SDLK_a:
-            // Touche A pressée
-            std::cout << "Touche A appuyee !" << std::endl;
-            break;
+    }
+    if (InputManager::Get()->IsHeld(SDLK_k))
+    {
+        //move left
+        circle1.Move(-5.f, 0.f);
 
-        case SDLK_z:
-            // Touche Z pressée
-            std::cout << "Touche Z appuyee !" << std::endl;
-            break;
-
-        case SDLK_e:
-            // Touche E pressée
-            std::cout << "Touche E appuyee !" << std::endl;
-            break;
-
-        case SDLK_r:
-            // Touche R pressée
-            std::cout << "Touche R appuyee !" << std::endl;
-            break;
-
-        case SDLK_t:
-            // Touche T pressée
-            std::cout << "Touche T appuyee !" << std::endl;
-            break;
-
-        case SDLK_y:
-            // Touche Y pressée
-            std::cout << "Touche Y appuyee !" << std::endl;
-            break;
-
-        case SDLK_SPACE:
-            // Touche ESPACE pressée
-            std::cout << "Touche ESPACE appuyee !" << std::endl;
-            break;
-
-        default:
-            break;
-        }
+    }
+    if (InputManager::Get()->IsHeld(SDLK_l))
+    {
+        //move down
+        circle1.Move(0.f, 5.f);
+    }
+    if (InputManager::Get()->IsHeld(SDLK_m))
+    {
+        //move right
+        circle1.Move(5.f, 0.f);
     }
 
-    for (SDL_KeyCode key : keysToCheck)
-    {
-        if (!input->IsHeld(key))
-        {
-            continue;
-        }
+    circle2.Move(0.f, -0.05f);
 
-        switch (key)
-        {
-        case SDLK_a:
-            // Touche A maintenue
-            std::cout << "Touche A maintenue !" << std::endl;
-            break;
-        case SDLK_z:
-            // Touche Z maintenue
-            std::cout << "Touche Z maintenue !" << std::endl;
-            break;
-        case SDLK_e:
-            // Touche E maintenue
-            std::cout << "Touche E maintenue !" << std::endl;
-            break;
-        case SDLK_r:
-            // Touche R maintenue
-            std::cout << "Touche R maintenue !" << std::endl;
-            break;
-        case SDLK_t:
-            // Touche T maintenue
-            std::cout << "Touche T maintenue !" << std::endl;
-            break;
-        case SDLK_y:
-            // Touche Y maintenue
-            std::cout << "Touche Y maintenue !" << std::endl;
-            break;
-        case SDLK_SPACE:
-            // Touche ESPACE maintenue
-            std::cout << "Touche ESPACE maintenue !" << std::endl;
-            break;
-        default:
-            break;
-        }
-    }
+    if (circle2.GetPosition(0.f, 1.f).y < 0)
+        circle2.SetPosition(200, HEIGHT + circle2.GetRadius());
 
-    for (SDL_KeyCode key : keysToCheck)
-    {
-        if (!input->IsUp(key))
-        {
-            continue;
-        }
+    if (circle1.IsColliding(&circle2))
+        std::cout << "Les cercles ce touchent." << std::endl;
 
-        switch (key)
-        {
-        case SDLK_a:
-			// Touche A relâchée
-            std::cout << "Touche A relachee !" << std::endl;
-            break;
-        case SDLK_z:
-            // Touche Z relâchée
-            std::cout << "Touche Z relachee !" << std::endl;
-            break;
-        case SDLK_e:
-            // Touche E relâchée
-            std::cout << "Touche E relachee !" << std::endl;
-            break;
-        case SDLK_r:
-            // Touche R relâchée
-            std::cout << "Touche R relachee !" << std::endl;
-            break;
-        case SDLK_t:
-            // Touche T relâchée
-            std::cout << "Touche T relachee !" << std::endl;
-            break;
-        case SDLK_y:
-            // Touche Y relâchée
-            std::cout << "Touche Y relachee !" << std::endl;
-            break;
-        case SDLK_SPACE:
-            // Touche ESPACE relâchée
-            std::cout << "Touche ESPACE relachee !" << std::endl;
-            break;
-        default:
-            break;
-        }
-    }
+    //DRAW
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+    circle1.Draw(renderer);
+    circle2.Draw(renderer);
 
+
+    SDL_RenderPresent(renderer);
 }
+
+
+
+//while (game_is_still_running)
+//{
+//    //  // 1) Met à jour les entrées (clavier)
+//    //  InputManager::Get()->Update();
+//    //  // 2) Lis les touches
+//    //  if (InputManager::Get()->IsDown(SDLK_a))
+//    //  {
+//          //std::cout << "Touche A appuyée !" << std::endl; // Détecte le moment où on appuie sur la touche A
+//    //  }
+//    //  if (InputManager::Get()->IsHeld(SDLK_a))
+//    //  {
+//          //std::cout << "Touche A maintenue !" << std::endl; // Détecte tant que la touche A est maintenue enfoncée
+//    //  }
+//    //  if (InputManager::Get()->IsUp(SDLK_a))
+//    //  {
+//          //std::cout << "Touche A relâchée !" << std::endl; // Détecte le moment où on relâche la touche A
+//    //  }
+//    //  // 3) Update du jeu (physique, logique, etc.)
+//    //  // 4) Render (affichage)
+//
+//      // Dans ta boucle de jeu
+//    InputManager* input = InputManager::Get();
+//    input->Update();
+//
+//
+//    // On parcourt une petite liste de touches à tester
+//    SDL_KeyCode keysToCheck[] = { SDLK_ESCAPE, SDLK_a, SDLK_z, SDLK_e, SDLK_r, SDLK_t, SDLK_y, SDLK_SPACE };
+//
+//    for (SDL_KeyCode key : keysToCheck)
+//    {
+//        if (!input->IsDown(key))
+//        {
+//            continue; // si cette touche n'a pas été pressée cette frame, on saute
+//        }
+//        switch (key)
+//        {
+//        case SDLK_ESCAPE:
+//            // quitter le jeu
+//            game_is_still_running = false;
+//            break;
+//
+//        case SDLK_a:
+//            // Touche A pressée
+//            std::cout << "Touche A appuyee !" << std::endl;
+//            break;
+//
+//        case SDLK_z:
+//            // Touche Z pressée
+//            std::cout << "Touche Z appuyee !" << std::endl;
+//            break;
+//
+//        case SDLK_e:
+//            // Touche E pressée
+//            std::cout << "Touche E appuyee !" << std::endl;
+//            break;
+//
+//        case SDLK_r:
+//            // Touche R pressée
+//            std::cout << "Touche R appuyee !" << std::endl;
+//            break;
+//
+//        case SDLK_t:
+//            // Touche T pressée
+//            std::cout << "Touche T appuyee !" << std::endl;
+//            break;
+//
+//        case SDLK_y:
+//            // Touche Y pressée
+//            std::cout << "Touche Y appuyee !" << std::endl;
+//            break;
+//
+//        case SDLK_SPACE:
+//            // Touche ESPACE pressée
+//            std::cout << "Touche ESPACE appuyee !" << std::endl;
+//            break;
+//
+//        default:
+//            break;
+//        }
+//    }
+//
+//    for (SDL_KeyCode key : keysToCheck)
+//    {
+//        if (!input->IsHeld(key))
+//        {
+//            continue;
+//        }
+//
+//        switch (key)
+//        {
+//        case SDLK_a:
+//            // Touche A maintenue
+//            std::cout << "Touche A maintenue !" << std::endl;
+//            break;
+//        case SDLK_z:
+//            // Touche Z maintenue
+//            std::cout << "Touche Z maintenue !" << std::endl;
+//            break;
+//        case SDLK_e:
+//            // Touche E maintenue
+//            std::cout << "Touche E maintenue !" << std::endl;
+//            break;
+//        case SDLK_r:
+//            // Touche R maintenue
+//            std::cout << "Touche R maintenue !" << std::endl;
+//            break;
+//        case SDLK_t:
+//            // Touche T maintenue
+//            std::cout << "Touche T maintenue !" << std::endl;
+//            break;
+//        case SDLK_y:
+//            // Touche Y maintenue
+//            std::cout << "Touche Y maintenue !" << std::endl;
+//            break;
+//        case SDLK_SPACE:
+//            // Touche ESPACE maintenue
+//            std::cout << "Touche ESPACE maintenue !" << std::endl;
+//            break;
+//        default:
+//            break;
+//        }
+//    }
+//
+//    for (SDL_KeyCode key : keysToCheck)
+//    {
+//        if (!input->IsUp(key))
+//        {
+//            continue;
+//        }
+//
+//        switch (key)
+//        {
+//        case SDLK_a:
+//			// Touche A relâchée
+//            std::cout << "Touche A relachee !" << std::endl;
+//            break;
+//        case SDLK_z:
+//            // Touche Z relâchée
+//            std::cout << "Touche Z relachee !" << std::endl;
+//            break;
+//        case SDLK_e:
+//            // Touche E relâchée
+//            std::cout << "Touche E relachee !" << std::endl;
+//            break;
+//        case SDLK_r:
+//            // Touche R relâchée
+//            std::cout << "Touche R relachee !" << std::endl;
+//            break;
+//        case SDLK_t:
+//            // Touche T relâchée
+//            std::cout << "Touche T relachee !" << std::endl;
+//            break;
+//        case SDLK_y:
+//            // Touche Y relâchée
+//            std::cout << "Touche Y relachee !" << std::endl;
+//            break;
+//        case SDLK_SPACE:
+//            // Touche ESPACE relâchée
+//            std::cout << "Touche ESPACE relachee !" << std::endl;
+//            break;
+//        default:
+//            break;
+//        }
+//    }
+//
+//}
     
     SDL_Delay(1000);
     SDL_DestroyWindow(window);
