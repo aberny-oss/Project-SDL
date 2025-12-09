@@ -16,10 +16,14 @@ void InputManager::Update()
 		State& state = m_states[i]; // Raccourci vers l'état de la touche i
 
 		if (state.isDown)          // Si la touche venait d'être pressée à la frame précédente
+		{
 			state.isHeld = true;   // On considère maintenant qu'elle est maintenue (held)
+		}
 
 		if (state.isUp)            // Si la touche venait d'être relâchée à la frame précédente
+		{
 			state.isHeld = false;  // Elle n'est plus maintenue
+		}
 
 		state.isDown = false;      // On réinitialise isDown pour cette nouvelle frame
 		state.isUp = false;        // On réinitialise isUp pour cette nouvelle frame
@@ -34,7 +38,9 @@ void InputManager::Update()
 		case SDL_KEYDOWN:          // Une touche vient d'être enfoncée
 		{
 			if (event.key.repeat)  // Si c'est un répétition automatique (touche maintenue)
+			{
 				break;             // On ignore cet événement pour ne pas compter plusieurs "down"
+			}
 
 			// On récupère le scancode de la touche et on marque isDown pour cette frame
 			m_states[event.key.keysym.scancode].isDown = true;
@@ -46,6 +52,18 @@ void InputManager::Update()
 			m_states[event.key.keysym.scancode].isUp = true;
 			break;
 		}
+		}
+		int x, y;
+		SDL_GetMouseState(&x, &y);
+		switch (event.button.type)
+		{
+		case SDL_MOUSEBUTTONDOWN:
+		    /*std::cout << "mouse button down" << std::endl;*/
+		    std::cout << "Clic a la positions " << x << " - " << y << std::endl;
+		    break;
+		case SDL_MOUSEBUTTONUP:
+		    /*std::cout << "mouse button up" << std::endl;*/
+		    break;
 		}
 	}
 
