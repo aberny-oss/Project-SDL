@@ -35,8 +35,6 @@ public:
 
 	void Move(float x, float y);
 
-	virtual Vector2f GetRadius() const = 0;
-
 
 };
 

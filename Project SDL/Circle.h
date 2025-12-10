@@ -13,9 +13,9 @@ public:
 
 	void Draw(SDL_Renderer* renderer) override;
 
-	int GetRadius() const override;
+	int GetRadius() const { return m_width / 2; }
 
-	bool IsColliding(const Geometry* target);
+	bool IsColliding(const Circle* target);
 
 };
 

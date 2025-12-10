@@ -135,7 +135,7 @@ int main(int argc, char* argv[])
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /*Rectangle rectangle1(100,50);
+    /*Rectangle rectangle1(100, 50);
     Rectangle rectangle2(100, 50);
     Rectangle rectangle3(100, 50);
     Rectangle rectangle4(100, 50);
@@ -189,20 +189,17 @@ int main(int argc, char* argv[])
     Vector2f posR5RD = rectangle5.GetPosition(1.f, 1.f);
     Vector2f posR5LD = rectangle5.GetPosition(0.f, 1.f);*/
 
-    Rectangle rectangle1(100, 50);
-    rectangle1.SetPosition(CENTER_X / 3, CENTER_Y / 3);
-    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     Circle circle1(32);
     Circle circle2(32);
     /*Circle circle3(32);
     Circle circle4(32);*/
 
-	circle1.SetPosition(CENTER_X / 2, CENTER_Y / 2);
-	circle2.SetPosition(CENTER_X / 2 + CENTER_X, CENTER_Y / 2 + CENTER_Y);
+    circle1.SetPosition(CENTER_X / 2, CENTER_Y / 2);
+    circle2.SetPosition(CENTER_X / 2 + CENTER_X, CENTER_Y / 2 + CENTER_Y);
 
     int speedC1 = 400;
-	int speedC2 = 300;
+    int speedC2 = 300;
 
     float deltaTime = 0;
 
@@ -240,22 +237,6 @@ int main(int argc, char* argv[])
 
 
     Image image1(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
-    image1.SetPosition(posR1RD.x, posR1RD.y, 0.f, 0.f);
-    image1.Draw(renderer);
-
-    Image image2(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
-    image2.SetPosition(posR2LD.x, posR2LD.y, 1.f, 0.f);
-    image2.Draw(renderer);
-
-    Image image3(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
-    image3.SetPosition(posR3LU.x, posR3LU.y, 1.f, 1.f);
-    image3.Draw(renderer);
-
-    Image image4(renderer, "imageSDL.bmp", CENTER_X / 2, CENTER_Y / 2);
-    image4.SetPosition(posR4RU.x, posR4RU.y, 0.f, 1.f);
-    image4.Draw(renderer);*/
-
-	/*Image image1(renderer, "imageSDL.bmp");
     Image image2(renderer, "imageSDL.bmp");
     Image image3(renderer, "imageSDL.bmp");
     Image image4(renderer, "imageSDL.bmp");
@@ -275,6 +256,10 @@ int main(int argc, char* argv[])
     image3.Draw(renderer);
     image4.Draw(renderer);*/
 
+
+    /*SDL_RenderCopy(renderer, texture, NULL, NULL);*/
+
+
     /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderDrawPoint(renderer, 100, 100);*/
 
@@ -283,6 +268,13 @@ int main(int argc, char* argv[])
 
     /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderDrawLine(renderer, 10, 10, 110, 110);*/
+
+    /*DrawRectangle(renderer, 10, 10, 200, 100);*/
+
+    //tuto
+    /*Rectangle rect(0, 0, 50, 50);*/
+
+    /*DrawCircle(renderer, 250, 250, 69, 666);*/
 
     SDL_RenderPresent(renderer);
 
@@ -398,9 +390,9 @@ bool game_is_still_running = true;
 
 while (game_is_still_running)
 {
-	Uint64 start = SDL_GetTicks64(); // Temps au début de la frame
+    Uint64 start = SDL_GetTicks64(); // Temps au début de la frame
 
-	// LEARN INPUTS
+    // LEARN INPUTS
     InputManager::Get()->Update();   // 1) lire les événements SDL
 
     //UPDATE
@@ -442,8 +434,6 @@ while (game_is_still_running)
     circle1.Draw(renderer);
     circle2.Draw(renderer);
 
-    rectangle1.Draw(renderer);
-
     SDL_RenderPresent(renderer);
     Uint64 end = SDL_GetTicks64();
 
@@ -460,6 +450,8 @@ while (game_is_still_running)
     //Display FPS
     std::cout << 1.f / deltaTime << std::endl;
 }
+
+
 
 //while (game_is_still_running)
 //{
